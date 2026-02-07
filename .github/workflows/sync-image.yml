@@ -1,0 +1,20 @@
+name: Sync Image to Aliyun
+on:
+  workflow_dispatch: # 手动触发
+  schedule:
+    - cron: '0 2 * * *' # 可选：每天凌晨2点自动同步
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Aliyun Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.ALIYUN_REGISTRY }}
+          username: ${{ secrets.ALIYUN_REGISTRY_USER }}
+          password: ${{ secrets.ALIYUN_REGISTRY_PASSWORD }}
+      - name: Pull from GHCR and Push to Aliyun
+        run: |
+          docker pull ghcr.io/1186258278/openclaw-zh:nightly
+          docker tag ghcr.io/1186258278/openclaw-zh:nightly ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/openclaw-zh:nightly
+          docker push ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/openclaw-zh:nightly
