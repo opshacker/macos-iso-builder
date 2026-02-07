@@ -22,3 +22,8 @@ jobs:
           docker pull ghcr.io/1186258278/openclaw-zh:latest
           docker tag ghcr.io/1186258278/openclaw-zh:latest ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/openclaw-zh:latest
           docker push ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/openclaw-zh:latest
+
+          # 新增：同步 tailscale:latest
+          docker pull tailscale/tailscale:latest
+          docker tag tailscale/tailscale:latest ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/tailscale:latest
+          docker push ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/tailscale:latest
