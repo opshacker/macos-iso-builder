@@ -27,3 +27,8 @@ jobs:
           docker pull tailscale/tailscale:latest
           docker tag tailscale/tailscale:latest ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/tailscale:latest
           docker push ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/tailscale:latest
+
+          # 新增：同步 flocks:latest
+          docker pull ghcr.io/agentflocks/flocks:latest
+          docker tag ghcr.io/agentflocks/flocks:latest ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/flocks:latest
+          docker push ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAME_SPACE }}/flocks:latest
